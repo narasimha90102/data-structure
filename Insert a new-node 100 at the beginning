@@ -4,11 +4,11 @@ struct Node {
     int data;
     struct Node* next;
 };
-void insertAtBeginning(struct Node** head_ref, int new_data) {
+void insertAtBeginning(struct Node** head, int new_data) {
   struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
     new_node->data = new_data;
-    new_node->next = *head_ref;
-    *head_ref = new_node;
+    new_node->next = *head;
+    *head = new_node;
 }
 void printList(struct Node* node) {
     while (node != NULL) {
@@ -18,9 +18,20 @@ void printList(struct Node* node) {
     printf("\n");
 }
 int main() {
-    struct Node* head = NULL;
+   struct Node* head = NULL;
+   int value;
+   printf("Enter values for the linked list (enter -2 to stop):\n");
+    while (1) {
+        scanf("%d", &value);
+        if (value == -2) {
+            break;
+        }
+        insertAtBeginning(&head, value);
+    }
     insertAtBeginning(&head, 100);
-    printf("Updated linked list: ");
+    printf("Input: ");
+    printList(head);
+    printf("Output: ");
     printList(head);
     return 0;
 }
